@@ -1,0 +1,22 @@
+﻿USE Warehouse;
+
+CREATE TABLE Suppliers (
+    SupplierID INT PRIMARY KEY IDENTITY,
+    SupplierName NVARCHAR(100) NOT NULL,
+    ContactInfo NVARCHAR(100)
+);
+
+CREATE TABLE ProductTypes (
+    TypeID INT PRIMARY KEY IDENTITY,
+    TypeName NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL,
+    Price DECIMAL(18, 2) NOT NULL,
+    Quantity INT NOT NULL,
+    DeliveryDate DATE NOT NULL DEFAULT GETDATE(),
+    SupplierID INT FOREIGN KEY REFERENCES Suppliers(SupplierID),
+    TypeID INT FOREIGN KEY REFERENCES ProductTypes(TypeID)
+);
